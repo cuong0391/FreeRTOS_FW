@@ -5,11 +5,11 @@
 #******************************************************************************
 OUTPUT_DIR			?=Output
 OBJ_BUILD			?=${OUTPUT_DIR}/obj
-TARGET_DESC			?=myproject
-OPT 				?=3
+TARGET_DESC			?=LightCCB
+OPT					?=3
 CPU_NAME			?=cortex-m4
 ENABLE_OS			?=1
-STM32F429x 			?=1
+STM32F429x			?=0
 
 OPENOCD           	?= openocd
 OPENOCD_INTERFACE 	?= interface/stlink-v2.cfg
@@ -61,8 +61,6 @@ CFLAGS_INC+=-I ${DIR_DEVICES}/include
 ## OS
 CFLAGS_INC+=-I ${DIR_OS}/Source/include
 CFLAGS_INC+=-I ${DIR_OS}/Source/portable/GCC/ARM_CM4F
-
-
 ##############################################################################
 #
 #   Source directories
@@ -293,15 +291,16 @@ ${COMPILER}/%.elf:
 #
 ##############################################################################
 ifeq ($(ENABLE_OS), 1)
-OBJ_OS= ${COMPILER}/croutine.o                     \
-        ${COMPILER}/list.o                         \
-        ${COMPILER}/queue.o                        \
-        ${COMPILER}/tasks.o                        \
-        ${COMPILER}/timers.o                       \
-        ${COMPILER}/port.o                         \
-        ${COMPILER}/heap_4.o                       \
-        ${COMPILER}/os_assert.o                         
+OBJ_OS=${COMPILER}/croutine.o                     \
+       ${COMPILER}/list.o                         \
+       ${COMPILER}/queue.o                        \
+       ${COMPILER}/tasks.o                        \
+       ${COMPILER}/timers.o                       \
+       ${COMPILER}/port.o                         \
+       ${COMPILER}/heap_4.o                       \
+       ${COMPILER}/os_assert.o                         
 endif
+
 OBJ_ASIC=${COMPILER}/misc.o                         \
          ${COMPILER}/stm32f4xx_system.o             \
 	     ${COMPILER}/stm32f4xx_i2c.o                \
@@ -370,7 +369,7 @@ docs:
 	#Flash the stm.
 flash:
 	$(OPENOCD) -d2 -f $(OPENOCD_INTERFACE) -f $(OPENOCD_TARGET) -c init -c targets -c "reset halt" \
-                 -c "flash write_image erase Output/obj/LightCCB.elf" -c "verify_image Output/obj/LightCCB.elf" -c "reset run" -c shutdown
+                 -c "flash write_image erase $(OBJ_BUILD)/${TARGET_DESC}.elf" -c "verify_image $(OBJ_BUILD)/${TARGET_DESC}.elf" -c "reset run" -c shutdown
                  
 reset : 
 	$(OPENOCD) -d0 -f $(OPENOCD_INTERFACE) -f $(OPENOCD_TARGET) -c init -c targets -c "reset" -c shutdown

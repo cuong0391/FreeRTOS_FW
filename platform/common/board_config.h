@@ -17,10 +17,21 @@
                                               
 /* Includes ------------------------------------------------------------------*/
 #include <stdint.h>
+#include "std_type.h"
 #include "hal_com.h"
 #include "hal_wdg.h"
 
 /* Exported define------------------------------------------------------------*/
+/** for development software debuging */
+#define LOG_VERBOSE                          4
+#define LOG_VERBOSE_DEFAULT                  3
+
+#define LOG_MSG                              STD_ON
+#define LOG_DEBUG                            STD_ON
+#define LOG_INFO                             STD_ON
+#define LOG_WARN                             STD_ON
+#define LOG_ERROR                            STD_ON
+
 
 
 /** Config for debug port used in #log.c , reference parameters in #hal_com.h */

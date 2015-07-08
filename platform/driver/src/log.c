@@ -38,7 +38,7 @@ static void com_irq_handler(uint8_t _c)
     c = _c;
 }
 /*
- * @brief log_init
+ * log_init
  */
 void log_init( void )
 {
@@ -46,43 +46,84 @@ void log_init( void )
     /* enable IRQ */
     hal_com_enable_irq(&com_dbg);
 }
-
-/*
+/**
  * log_err
  */
-#if (HAL_ERR_DEBUG == STD_OFF) 
-inline 
-#endif
-void log_err( const char* format, ... )
+#if(LOG_ERROR == STD_ON ) 
+void log_error( const char* format, ... )
 {
-#if (HAL_ERR_DEBUG == STD_ON) 
     __disable_irq();
+    ERROR_HEADER();
     va_list argptr;
     va_start(argptr, format);
     vfprintf(stderr, format, argptr);
     va_end(argptr);
+    COLOR_ENDL();
     __enable_irq(); 
-#endif
 }
-
+#endif
+/*
+ * log_warn
+ */
+#if(LOG_WARN == STD_ON )  
+void log_warn( const char* format, ... )
+{
+    __disable_irq();
+    WARN_HEADER();
+    va_list argptr;
+    va_start(argptr, format);
+    vfprintf(stderr, format, argptr);
+    va_end(argptr);
+    COLOR_ENDL();
+    __enable_irq(); 
+}
+#endif
+/**
+ * log_info
+ */
+#if(LOG_INFO == STD_ON )  
+void log_info( const char* format, ... )
+{
+    __disable_irq();
+    INFO_HEADER();
+    va_list argptr;
+    va_start(argptr, format);
+    vfprintf(stderr, format, argptr);
+    va_end(argptr);
+    COLOR_ENDL();
+    __enable_irq(); 
+}
+#endif
+/**
+ * log_debug 
+ */
+#if (LOG_DEBUG == STD_ON)
+void log_debug( const char* format, ... )
+{
+    __disable_irq();
+    DEBUG_HEADER();
+    va_list argptr;
+    va_start(argptr, format);
+    vfprintf(stderr, format, argptr);
+    va_end(argptr);
+    COLOR_ENDL();
+    __enable_irq(); 
+}
+#endif
 /*
  * log_msg
  */
-#if (HAL_MSG_DEBUG == STD_OFF) 
-inline 
-#endif 
+#if (LOG_MSG == STD_ON) 
 void log_msg( const char* format, ... )
 {
-#if (HAL_MSG_DEBUG == STD_ON) 
     __disable_irq();
     va_list argptr;
     va_start(argptr, format);
     vfprintf(stderr, format, argptr);
     va_end(argptr);
     __enable_irq();
-#endif
 }
-
+#endif
 /* retarget printf for arm gcc */
 
 /*

@@ -16,44 +16,74 @@
 #endif
 /* Includes ------------------------------------------------------------------*/
 #include <stdint.h>
-#include "std_type.h"
-#include "board_config.h" 	
-/* Exported define -------------------------------------------------_---------*/
+#include <stdio.h>
+#include <stdarg.h>
+#include <board_config.h>
+/* Exported define -----------------------------------------------------------*/
 
-
-/** for development software debuging */
-#define HAL_ERR_DEBUG               STD_ON
-/** Message debug */
-#define HAL_MSG_DEBUG               STD_ON
-
-/* Exported functions ------------------------------------------------------- */
-
+#define DEBUG_HEADER()              fprintf(stderr,"\t\033[39mDEBUG  \t: ")
+#define INFO_HEADER()               fprintf(stderr,"\t\033[92mINFO   \t: ")
+#define WARN_HEADER()               fprintf(stderr,"\t\033[93mWARNING\t: ")
+#define ERROR_HEADER()              fprintf(stderr,"\t\033[91mERROR  \t: ")
+#define COLOR_ENDL()                fprintf(stderr,"\033[39m")
+/* Exported macros -------------------------------------------------------- */
 /**
  * @brief log_init
- * @param None
- * @return None
  */
 void log_init( void );
-
 /**
- * @brief log_err
- * @param None
+ * @brief log_error
+ * @param restriction
  * @return None
  */
-#if (HAL_ERR_DEBUG == STD_OFF) 
-inline 
+#if(LOG_ERROR == STD_ON ) 
+void log_error( const char* format, ... );
+#else
+#define log_error(...) {/* do nothing */}
 #endif
-void log_err( const char* format, ... );
+
+/**
+ * @brief log_warn
+ * @param restriction
+ * @return None
+ */
+#if(LOG_WARN == STD_ON ) 
+void log_warn( const char* format, ... );
+#else
+#define log_warn(...) {/* do nothing */}
+#endif
+
+/**
+ * @brief log_info
+ * @param restriction
+ * @return None
+ */
+#if(LOG_INFO == STD_ON ) 
+void log_info( const char* format, ... );
+#else
+#define log_info(...) {/* do nothing */}
+#endif
+
+/**
+ * @brief log_debug
+ * @param restriction
+ * @return None
+ */
+#if(LOG_DEBUG == STD_ON ) 
+void log_debug( const char* format, ... );
+#else
+#define log_debug(...) {/* do nothing */}
+#endif
 
 /**
  * @brief log_msg
- * @param None
+ * @param restriction
  * @return None
  */
-#if (HAL_MSG_DEBUG == STD_OFF) 
-inline 
-#endif
+#if(LOG_MSG == STD_ON ) 
 void log_msg( const char* format, ... );
-
+#else
+#define log_msg(...) {/* do nothing */}
+#endif
 
 #endif /* _LOG_H_ */

@@ -16,7 +16,7 @@ int main (void)
     /* init platform */
     init_platform();   
     /* introduction */
-    log_msg("Light P1\r\n");
+    log_msg("Start FreeRTOS FW\r\n");
     /* add task to os kernel */ 
     while( __TASK_NUM > Index  )
     {

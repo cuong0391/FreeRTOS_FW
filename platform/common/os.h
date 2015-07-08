@@ -39,7 +39,7 @@
 
 /* Exported define -----------------------------------------------------------*/
 
-#define    __TASK_NUM               6
+#define    __TASK_NUM               1
 
 #define BYTETOBINARYPATTERN "%d%d%d%d%d%d%d%d"
 #define BYTETOBINARY(byte)  \
