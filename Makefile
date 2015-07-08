@@ -5,7 +5,7 @@
 #******************************************************************************
 OUTPUT_DIR			?=Output
 OBJ_BUILD			?=${OUTPUT_DIR}/obj
-TARGET_DESC			?=LightCCB
+TARGET_DESC			?=FreeRTOS
 OPT					?=3
 CPU_NAME			?=cortex-m4
 ENABLE_OS			?=1
@@ -145,7 +145,7 @@ CPU_DEF+=--specs=rdimon.specs
 CFLAGS_DEF+=-D_USE_STDPERIPH_DRIVER
 CFLAGS_DEF+=-D_USE_FULL_ASSERT
 CFLAGS_DEF+=-D_HSE_VALUE=8000000
-
+CFLAGS_DEF+=-DSTM32F4XX
 ##############################################################################
 #
 #   The flags passed to the assembler.
@@ -322,12 +322,16 @@ endif
 
 OBJ_DRIVER=${COMPILER}/init_platform.o     \
 		   ${COMPILER}/log.o 				\
+		   ${COMPILER}/i2cdev.o			
             
 
 OBJ_HAL+=${COMPILER}/hal_pwm.o              \
          ${COMPILER}/hal_com.o              \
          ${COMPILER}/hal_wdg.o              \
-         ${COMPILER}/hal_spi.o              
+         ${COMPILER}/cpal_usercallback_template.o \
+         ${COMPILER}/cpal_hal.o             \
+         ${COMPILER}/cpal_i2c.o             \
+         ${COMPILER}/cpal_i2c_hal_stm32f4xx.o \
 
 
 OBJ_APP=${COMPILER}/___main.o             \
