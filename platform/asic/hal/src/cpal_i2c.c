@@ -131,7 +131,7 @@ static uint32_t CPAL_I2C_Timeout (CPAL_InitTypeDef* pDevInitStruct);
   */
 uint32_t CPAL_I2C_Init(CPAL_InitTypeDef* pDevInitStruct) 
 {
-  CPAL_LOG("\n\r\n\rLOG <CPAL_I2C_Init> : I2C Device Init");
+  CPAL_LOG("\n\r\n\rLOG : I2C Device Init");
   
   /* If CPAL_State is not BUSY */
   if ((pDevInitStruct->CPAL_State == CPAL_STATE_READY) 

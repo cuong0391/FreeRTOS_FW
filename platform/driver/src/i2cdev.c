@@ -6,14 +6,10 @@
 
 #include <stdint.h>
 #include <stdbool.h>
-
 #include "i2cdev.h"
-#include "FreeRTOS.h"
-#include "semphr.h"
-#include "task.h"
-
 #include "cpal_i2c.h"
 #include "stm32f40x_i2c_cpal_conf.h"
+#include "os.h"
 
 #define OWN_ADDRESS        0x74
 #define I2C_CLOCK_SPEED    400000;
@@ -305,7 +301,7 @@ static void i2cdevReleaseSemaphoreI2C1(void)
 
   if(xHigherPriorityTaskWoken)
   {
-   vPortYield();
+   portYIELD_FROM_ISR( xHigherPriorityTaskWoken );
   }
 }
 
@@ -317,7 +313,7 @@ static void i2cdevReleaseSemaphoreI2C3(void)
 
   if(xHigherPriorityTaskWoken)
   {
-   vPortYield();
+   portYIELD_FROM_ISR( xHigherPriorityTaskWoken );
   }
 }
 
@@ -331,7 +327,7 @@ static void i2cdevReleaseSemaphoreI2C3(void)
   */
 void CPAL_I2C_ERR_UserCallback(CPAL_DevTypeDef pDevInstance, uint32_t DeviceError)
 {
-//  DEBUG_PRINT("Error callback nr: %i\n", (int)DeviceError);
+//  log_msg("Error callback nr: %i\n", (int)DeviceError);
 }
 
 /**

@@ -124,6 +124,24 @@ void log_msg( const char* format, ... )
     __enable_irq();
 }
 #endif
+/**
+ * @brief  Outputs a formatted string on the DBGU stream, using a variable number of
+ *         arguments.
+ *
+ * @param  pFormat  Format string.
+ */
+signed int printf(const char *pFormat, ...)
+{
+    va_list ap;
+    signed int result;
+  __disable_irq();
+    /* Forward call to vprintf */
+    va_start(ap, pFormat);
+    result = vfprintf(stdout, pFormat, ap);
+    va_end(ap);
+  __enable_irq();
+    return result;
+}
 /* retarget printf for arm gcc */
 
 /*

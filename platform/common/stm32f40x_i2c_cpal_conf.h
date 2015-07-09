@@ -574,10 +574,10 @@
                  
 
 /* To Enable CPAL_DEBUG Option Uncomment the define below */
-//#define CPAL_DEBUG
+#define CPAL_DEBUG
 
 #ifdef CPAL_DEBUG
-#define CPAL_LOG(Str)                   uartPrintf(Str)
+#define CPAL_LOG(...)                   printf(__VA_ARGS__)
 #include <stdio.h>                     /* This header file must be included when using CPAL_DEBUG option   */
 #else
 #define CPAL_LOG(Str)                   ((void)0)

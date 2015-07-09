@@ -322,7 +322,8 @@ endif
 
 OBJ_DRIVER=${COMPILER}/init_platform.o     \
 		   ${COMPILER}/log.o 				\
-		   ${COMPILER}/i2cdev.o			
+		   ${COMPILER}/i2cdev.o			\
+		   ${COMPILER}/mpu6050.o			\
             
 
 OBJ_HAL+=${COMPILER}/hal_pwm.o              \
