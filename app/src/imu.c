@@ -21,7 +21,7 @@ void imuInit(void)
     }else
     {
         log_msg("%s:ret=connnect failed\r\n",__FUNCTION__,ret);
-        return;
+//        return;
     }
     /* reset mpu */
     mpu6050Reset();
@@ -50,5 +50,7 @@ void imuTask(void* pvParametter)
     while(xTaskGetTickCount() < 1000);
     imuInit();
     for(;;)
-    {}
+    {
+    	vTaskDelay(1);
+    }
 }
