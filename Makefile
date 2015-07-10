@@ -338,6 +338,7 @@ OBJ_HAL+=${COMPILER}/hal_pwm.o              \
 OBJ_APP=${COMPILER}/___main.o             \
         ${COMPILER}/__task_list.o         \
         ${COMPILER}/__task_watchdog_kick.o  \
+        ${COMPILER}/imu.o
 
 
 $(shell mkdir -p ${OUTPUT_DIR} 2>/dev/null)

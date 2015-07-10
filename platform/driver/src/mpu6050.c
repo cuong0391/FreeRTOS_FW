@@ -47,8 +47,8 @@ void mpu6050Init(I2C_Dev *i2cPort)
     return;
 
   I2Cx = i2cPort;
-  devAddr = MPU6050_ADDRESS_AD0_HIGH;
-//FIXME    devAddr = MPU6050_ADDRESS_AD0_LOW;
+//  devAddr = MPU6050_ADDRESS_AD0_HIGH;
+  devAddr = MPU6050_ADDRESS_AD0_LOW;
 
   isInit = true;
 }
@@ -71,7 +71,8 @@ bool mpu6050Test(void)
  */
 bool mpu6050TestConnection()
 {
-  return mpu6050GetDeviceID() == 0x38; //0x38 is MPU9250 ID with AD0 = 0;
+	uint8_t ret=0;
+  ret =mpu6050GetDeviceID(); //0x38 is MPU9250 ID with AD0 = 0;
 }
 
 /** Do a MPU6050 self test.

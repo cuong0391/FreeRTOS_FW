@@ -24,8 +24,14 @@ const __task_configure_t __task_list[__TASK_NUM] =
         .task           =   __task_watchdog_kick,
         .name           =   "__task_watchdog_kick",
         .prio           =   __TASK_PRIO_HIGHEST,
-        .stacksize      =   __TASK_STACK_SIZE_31,
+        .stacksize      =   __TASK_STACK_SIZE_31
     },
+    {
+      .task             = imuTask,
+      .name             = "__task_imu",
+      .prio             = __TASK_PRIO_1,
+      .stacksize        = __TASK_STACK_SIZE_26
+    }
     /**
      * @brief ADD MORE TASK HERE <<<<<<<<<<<<<<<<<<<
      */

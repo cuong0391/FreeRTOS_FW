@@ -32,14 +32,15 @@
 #include "std_type.h"
 
 /** driver inclusion */
-#include "log.h"        
+#include "log.h"
+#include "mpu6050.h"        
 /** application inclusion */
 #include "__task_watchdog_kick.h" 
-  
+#include "imu.h"  
 
 /* Exported define -----------------------------------------------------------*/
 
-#define    __TASK_NUM               1
+#define    __TASK_NUM               2
 
 #define BYTETOBINARYPATTERN "%d%d%d%d%d%d%d%d"
 #define BYTETOBINARY(byte)  \
